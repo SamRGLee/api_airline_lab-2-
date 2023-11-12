@@ -20,7 +20,7 @@ public class PassengerController {
 
     // Display details of all passengers
     @GetMapping
-    public ResponseEntity<List<Passenger>> getAllPassengers(@RequestBody Passenger passenger)
+    public ResponseEntity<List<Passenger>> getAllPassengers()
     {
         List<Passenger> getAllThePassengers = passengerService.findAllPassengers();
         return new ResponseEntity<>(getAllThePassengers, HttpStatus.OK);

@@ -1,7 +1,7 @@
 package com.example.airline_api.controllers;
 
+import com.example.airline_api.models.BookingDTO;
 import com.example.airline_api.models.Flight;
-import com.example.airline_api.models.FlightDTO;
 import com.example.airline_api.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +16,12 @@ public class FlightController {
 
     @Autowired
     private FlightService flightService;
-    private FlightDTO flightDTO;
+    @Autowired
+    private BookingDTO bookingDTO;
 
     // Display all available flights
     @GetMapping
-    public ResponseEntity<List<Flight>> getAllFlights(@RequestBody Flight flight)
+    public ResponseEntity<List<Flight>> getAllFlights()
     {
         List<Flight> getAllTheFlights = flightService.findAllFlights();
         return new ResponseEntity<>(getAllTheFlights, HttpStatus.OK);
@@ -36,9 +37,9 @@ public class FlightController {
 
     // Add details of a new flight
     @PostMapping("/flights")
-    public ResponseEntity<Flight> addNewFlight(@RequestBody FlightDTO flightDTO)
+    public ResponseEntity<Flight> addNewFlight(@RequestBody Flight flight)
     {
-        Flight addedFlight = flightService.addFlight(flightDTO);
+        Flight addedFlight = flightService.addFlight(flight);
         return new ResponseEntity<>(addedFlight, HttpStatus.CREATED);
     }
 
